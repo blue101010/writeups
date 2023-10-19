@@ -1,9 +1,8 @@
 # Challenge
 
-
 ![Alt text](image.png)
 
-# Challenge
+# Solution
 
 ```
 $ grep --color s passwords.txt
