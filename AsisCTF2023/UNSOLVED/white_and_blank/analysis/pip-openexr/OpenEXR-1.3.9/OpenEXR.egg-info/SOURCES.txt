@@ -1,0 +1,9 @@
+Imath.py
+LICENSE
+OpenEXR.cpp
+README.md
+setup.py
+OpenEXR.egg-info/PKG-INFO
+OpenEXR.egg-info/SOURCES.txt
+OpenEXR.egg-info/dependency_links.txt
+OpenEXR.egg-info/top_level.txt

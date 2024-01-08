@@ -1,0 +1,3 @@
+/tmp/_build/CMakeFiles/exrwriter.dir
+/tmp/_build/CMakeFiles/edit_cache.dir
+/tmp/_build/CMakeFiles/rebuild_cache.dir
