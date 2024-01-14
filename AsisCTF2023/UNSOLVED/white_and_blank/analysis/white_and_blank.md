@@ -482,3 +482,94 @@ Reading Pixels: The readPixels() function is crucial for determining how the dat
 Error Handling: The error handling in functions like readPixels() ensures that any attempt to read outside the dataWindow boundaries is flagged, preventing reading invalid or non-existent data.
 
 From this analysis, it's clear that the dataWindow plays a significant role in determining the size of the image data that is read and processed. The functions in ImfInputFile.cpp use dataWindow to establish boundaries and sizes for reading and processing image data.
+
+
+## Tests with dataWindow size
+
+Changing adress 0x00000081 - 0x00000081 (0x1 |    from HEX value 10 to 20 we have the displayWindow and datawindow at the same size  (but still the Early end of file error)
+
+```
+$ exrinfo whiteandblank
+File 'whiteandblank':
+  compression: 'zip'
+  displayWindow: [ 0, 0 - 63 63 ] 64 x 64
+  dataWindow: [ 0, 0 - 63 63 ] 64 x 64
+  channels: 3 channels
+   'B': half samp 1 1
+
+$ exrheader whiteandblank                                                                                 
+exrheader: Cannot read image file "whiteandblank". Early end of file at position 0xffffffffffffffff: read 325911 out of 1677721600 requested bytes.
+```
+
+![Alt text](image-21.png)
+
+## Tests with previously generated legitimate EXR file
+
+From Exwriter exemple [hello.exr](../analysis/exrwriter/hello.exr) we could get insight on the right OpenEXR format
+
+
+Unfortunately Bindiff (/opt/bindiff/bin --ui) will not be useful in this case as the whiteandblank fails to be opened
+
+![Alt text](image-22.png)
+```
+# https://github.com/google/bindiff/releases
+wget https://github.com/google/bindiff/releases/download/v8/bindiff_8_amd64.deb   
+ sudo apt install  ./bindiff_8_amd64.deb
+
+/opt/bindiff/bin --primary whiteandblank --secondary hello.exr | more                
+Error: parsing failed for exported file: whiteandblank                                                                                                              
+BinDiff 8 (@568181968, Sep 25 2023), (c)2004-2011 zynamics GmbH, (c)2011-2023 Google LLC.    
+```
+
+Whith Ghydra we get for whiteandblank :
+```
+Minimum Address:00000000
+Maximum Address:0004f987
+# of Bytes:326024
+```
+
+After checking Whith Ghydra differences on headers, it is Interesting to find that there is a signicative difference on the **compression** parameter !
+
+![Alt text](image-24.png)
+
+In whiteandblank the compression parameter  have an "ampersand" in the middle as "compression&compression" ...
+
+![Alt text](image-23.png)
+
+...but a legitimate EXR file ref 
+https://openexr.com/en/latest/OpenEXRFileLayout.html is not ...
+
+![Alt text](image-25.png)
+
+So we want to test a fix of this "issue" : a 26 to 00 then :
+![Alt text](image-26.png)
+
+![Alt text](image-27.png)
+
+and yes the magic happen, the file is now recognized correctly :
+
+
+```
+exrheader whiteandblank                                                                                  
+
+file whiteandblank:
+
+file format version: 2, flags 0x0
+channels (type chlist):
+    B, 16-bit floating-point, sampling 1 1
+    G, 16-bit floating-point, sampling 1 1
+    R, 16-bit floating-point, sampling 1 1
+compression (type compression): none
+dataWindow (type box2i): (0 0) - (1334 36)
+displayWindow (type box2i): (0 0) - (36 36)
+lineOrder (type lineOrder): increasing y
+pixelAspectRatio (type float): 1
+screenWindowCenter (type v2f): (0 0)
+screenWindowWidth (type float): 1
+type (type string): "scanlineimage"
+```
+
+We can now open the file in gimp :-)
+We are getting closer...but this is not yet finished
+
+![Alt text](image-28.png)
