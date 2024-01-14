@@ -528,6 +528,8 @@ Maximum Address:0004f987
 # of Bytes:326024
 ```
 
+Interesting link even if not directly related to this challenge: https://ihack4falafel.github.io/Patch-Diffing-with-Ghidra/
+
 After checking Whith Ghydra differences on headers, it is Interesting to find that there is a signicative difference on the **compression** parameter !
 
 ![Alt text](image-24.png)
@@ -537,7 +539,7 @@ In whiteandblank the compression parameter  have an "ampersand" in the middle as
 ![Alt text](image-23.png)
 
 ...but a legitimate EXR file ref 
-https://openexr.com/en/latest/OpenEXRFileLayout.html is not ...
+https://openexr.com/en/latest/OpenEXRFileLayout.html is not separated by an ampersand ;-)...
 
 ![Alt text](image-25.png)
 
@@ -573,3 +575,116 @@ We can now open the file in gimp :-)
 We are getting closer...but this is not yet finished
 
 ![Alt text](image-28.png)
+
+Another interesting tool to compare binaries is ImHex with the (View >> Diffing function), with this we can more easily compare for example the CTF file and a legitimate file header.
+
+![Alt text](image-30.png)
+
+![Alt text](image-29.png)
+
+
+Earlier in the analysis, another peculiar observation was that the tail of the file was composed of a JPEG file 
+
+![Alt text](image-32.png)
+
+
+
+
+
+![Alt text](image-33.png)
+ref https://gist.github.com/leommoore/f9e57ba2aa4bf197ebc5
+
+```
+3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 88 37 07 27 86 31 95 34 4C 38 5F 3B E0 3B F0 3B F8 3B 00 3C 00 3C E8 3B 00 3C 00 3C F0 3B FF D8 FF E0 00 10 47 46 49 50 00 01 01 00 00 48 00 48 00 00 FF DB 00 43 00 02 02 02 02 02 01 02 02 02 03 05 02 02 03 03 06 04 03 03 03 03 07 05 05 04 06 08 07
+```
+
+Difficult to identify what is ""GFIP"" however ??
+![Alt text](image-31.png)
+
+In Imhex  the String beginning is ...\xFF\xD8\xFF\xE0\x00\x10GFIP\x00\x01\... : 
+![Alt text](image-34.png)
+
+
+The previously extracted JPEG is seen corrupted for Gimp, so ... is this another level of complication of the challenge ?
+
+![Alt text](image-35.png)
+Anyway Gimp is able to open the JPEG file that is displayed as a line  :
+![Alt text](image-36.png).
+
+According to Gimp metadata the JPEG file is seen as quite small (257 x 1 ).
+
+Let's extarct it with formost
+
+```
+└─$ foremost -v /mnt/d/DATA/GIT/writeups/AsisCTF2023/UNSOLVED/white_and_blank/analysis/whiteandblank
+Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus
+Audit File
+
+Foremost started at Sun Jan 14 16:39:44 2024
+Invocation: foremost -v /mnt/d/DATA/GIT/writeups/AsisCTF2023/UNSOLVED/white_and_blank/analysis/whiteandblank 
+Output directory: /tmp/output
+Configuration file: /etc/foremost.conf
+Processing: /mnt/d/DATA/GIT/writeups/AsisCTF2023/UNSOLVED/white_and_blank/analysis/whiteandblank
+|------------------------------------------------------------------
+File: /mnt/d/DATA/GIT/writeups/AsisCTF2023/UNSOLVED/white_and_blank/analysis/whiteandblank
+Start: Sun Jan 14 16:39:44 2024
+Length: 318 KB (326024 bytes)
+ 
+Num      Name (bs=512)         Size      File Offset     Comment 
+
+0:      00000580.jpg          28 KB          297275      
+*|
+Finish: Sun Jan 14 16:39:44 2024
+
+1 FILES EXTRACTED
+
+
+ file 00000580.jpg                                                                                                                                                               
+00000580.jpg: JPEG image data, baseline, precision 8, 257x1, components 1
+```
+
+With ImHex we can use the Pattern fonctionnality to have better visibility on the file
+File >> IMport >> Pattern file >>  jpeg.hexpat
+
+We Can then navigate on the header with preloaded bookmarks and compare to the standard sections https://docs.fileformat.com/image/jpeg/ and https://en.wikipedia.org/wiki/JPEG_File_Interchange_Format
+
+
+![Alt text](image-37.png)
+
+A first test is to try with the initial values of the EXR :
+
+```
+displayWindow: [ 0, 0 - 1334 36 ] 1335 x 37
+```
+
+So using, for example Imhex Tool base converter I get a new sizing
+
+imageHeight new:(0x0537)  (before:):(7)(0x0001)
+![Alt text](image-41.png)
+
+![Alt text](image-40.png)
+
+imageWidth  new:(0x0025)  (before:):(257)(0x0101)
+![Alt text](image-38.png)
+
+![Alt text](image-39.png)
+
+At this point we are getting closer as there are visible letters when opened with Gimp ;-)
+
+![Alt text](image-42.png)
+
+Then we continue to play with the sizes .
+
+Finally 1523 X 1523 is OK () but still not ok.. for gimp but no problem) 
+
+![Alt text](image-43.png)
+
+An then, behold,  finally we get the FLAG !! (logically with height=37=0x25, all is OK)
+
+![Alt text](image-44.png)
+
+# THE FLAG :
+
+```
+ASIS{PGF_a_N3w_pr0gr35s1v3_f1L3_f0rM4T_f0R_l0ssY_4and_l05sL3sS_im4g3_c0mpr3ss!0n}
+```
