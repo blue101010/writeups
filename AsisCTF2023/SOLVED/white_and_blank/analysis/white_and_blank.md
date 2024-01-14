@@ -616,17 +616,17 @@ According to Gimp metadata the JPEG file is seen as quite small (257 x 1 ).
 Let's extarct it with formost
 
 ```
-└─$ foremost -v /mnt/d/DATA/GIT/writeups/AsisCTF2023/UNSOLVED/white_and_blank/analysis/whiteandblank
+└─$ foremost -v whiteandblank
 Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus
 Audit File
 
 Foremost started at Sun Jan 14 16:39:44 2024
-Invocation: foremost -v /mnt/d/DATA/GIT/writeups/AsisCTF2023/UNSOLVED/white_and_blank/analysis/whiteandblank 
+Invocation: foremost -v whiteandblank 
 Output directory: /tmp/output
 Configuration file: /etc/foremost.conf
-Processing: /mnt/d/DATA/GIT/writeups/AsisCTF2023/UNSOLVED/white_and_blank/analysis/whiteandblank
+Processing: whiteandblank
 |------------------------------------------------------------------
-File: /mnt/d/DATA/GIT/writeups/AsisCTF2023/UNSOLVED/white_and_blank/analysis/whiteandblank
+File: whiteandblank
 Start: Sun Jan 14 16:39:44 2024
 Length: 318 KB (326024 bytes)
  
@@ -646,7 +646,7 @@ Finish: Sun Jan 14 16:39:44 2024
 With ImHex we can use the Pattern fonctionnality to have better visibility on the file
 File >> IMport >> Pattern file >>  jpeg.hexpat
 
-We Can then navigate on the header with preloaded bookmarks and compare to the standard sections https://docs.fileformat.com/image/jpeg/ and https://en.wikipedia.org/wiki/JPEG_File_Interchange_Format
+We can then navigate on the header with preloaded bookmarks and compare to the standard sections https://docs.fileformat.com/image/jpeg/ and https://en.wikipedia.org/wiki/JPEG_File_Interchange_Format
 
 
 ![Alt text](image-37.png)
@@ -657,14 +657,18 @@ A first test is to try with the initial values of the EXR :
 displayWindow: [ 0, 0 - 1334 36 ] 1335 x 37
 ```
 
-So using, for example Imhex Tool base converter I get a new sizing
+So using, for example ImHex Tool base converter I get a new sizing :
 
 imageHeight new:(0x0537)  (before:):(7)(0x0001)
+
+imageWidth  new:(0x0025)  (before:):(257)(0x0101)
+
+
 ![Alt text](image-41.png)
 
 ![Alt text](image-40.png)
 
-imageWidth  new:(0x0025)  (before:):(257)(0x0101)
+
 ![Alt text](image-38.png)
 
 ![Alt text](image-39.png)
