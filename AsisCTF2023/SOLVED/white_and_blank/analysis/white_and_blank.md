@@ -613,7 +613,7 @@ Anyway Gimp is able to open the JPEG file that is displayed as a line  :
 
 According to Gimp metadata the JPEG file is seen as quite small (257 x 1 ).
 
-Let's extarct it with formost
+Let's extract it with foremost:
 
 ```
 └─$ foremost -v whiteandblank
