@@ -660,7 +660,6 @@ displayWindow: [ 0, 0 - 1334 36 ] 1335 x 37
 So using, for example ImHex Tool base converter I get a new sizing :
 
 imageHeight new:(0x0537)  (before:):(7)(0x0001)
-
 imageWidth  new:(0x0025)  (before:):(257)(0x0101)
 
 
