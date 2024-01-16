@@ -1,7 +1,7 @@
 # Challenge White & Blank
 
 
-From the strings in the file it looks like a file in openEXR format https://openexr.com/en/latest/
+From the strings in the provided file, it looks like an openEXR format file, REF https://openexr.com/en/latest/
 ```
 strings whiteandblank | more
 channels
@@ -23,6 +23,7 @@ float
 ```
 
 # Install openexr
+Let's install openexr
 ```
 https://openexr.com/en/latest/install.html#install
 % sudo apt-get update
@@ -50,7 +51,7 @@ exrcheck whiteandblank
  file whiteandblank bad
 ```
 
-But an openexr file format is supposed to start with 76 2F 31 01
+But an openexr file format is supposed to start with 76 2F 31 01...
 
 https://www.garykessler.net/library/file_sigs.html
 
@@ -65,7 +66,7 @@ https://www.garykessler.net/library/file_sigs.html
 
 ![Alt text](image-3.png)
 
-After modification of the header to 76 2d 3F 01, The file is better interpreted by exrinfo  (but still considered bad from exrcheck...)
+After modification of the header to 76 2d 3F 01, the file is better interpreted by exrinfo  (but still considered bad from exrcheck...)
 ```
 └─$ exrinfo whiteandblank
 File 'whiteandblank':
@@ -113,7 +114,7 @@ G half 1 1
 R half 1 1Truncated or corrupted EXR file
 ```
 
-File seems to be composed of 2 parts....
+The file seems to be composed of 2 parts...
 1- EXR file
 2- RAW JPEG ?
 
@@ -185,11 +186,11 @@ JPEG data extracted to: output.jpg
 output.jpg: JPEG image data, baseline, precision 8, 257x1, components 1
 ```
 
-A this point we have and output.jpeg file that is kind of a white line (257x1).
+A this point we have and output.jpeg file that is kind of a white line (257x1)...
 ...TBC
 
 
-Not exactly full white line...!!!???
+Not exactly a full white line...!!!???
 From https://29a.ch/photo-forensics/#forensic-magnifier
 
 ![Alt text](image-10.png)
@@ -240,12 +241,9 @@ No modification.
 hello.exr :
 ![Alt text](image-12.png)
 
-
-
-
-2./Installation of a VStudio extension that can visuzalize .exr files 
+2./Installation of a VStudio extension that can assist to visualize .exr files 
 ![Alt text](image.png)
-...ok but will open of course only correct openEXR files
+...ok but it will open of course only correct openEXR files...
 
 
 3./Review of the OpenEXR layout https://openexr.com/en/latest/OpenEXRFileLayout.html
@@ -263,8 +261,8 @@ So 80 3F 00 is the end of the oepenEXR header :
 
 
 At this point we have an EXR file:
--with a displayWindow larger than dataWindow...
--An EXR file that have an "early ending" anf a end of file that is a JPEG (247 x 1 pixels)
+- with a displayWindow larger than dataWindow...
+- An EXR file that have an "early ending" anf a end of file that is a JPEG (247 x 1 pixels)
 ```
 └─$ exrinfo whiteandblank
 File 'whiteandblank':
@@ -278,8 +276,6 @@ File 'whiteandblank':
 
 
 └─$ cd OPENXR/
-
-
 └─$ exrinfo hello.exr
 File 'hello.exr':
   compression: 'piz'
@@ -293,7 +289,6 @@ File 'hello.exr':
    
 └─$ exrcheck whiteandblank
  file whiteandblank bad
-
 
 └─$ exrheader whiteandblank
 Cannot read image file "whiteandblank". Early end of file: read 325911 out of 1677721600 requested bytes.
@@ -349,7 +344,6 @@ File 'whiteandblank':
    'G': half samp 1 1
    'R': half samp 1 1
 
-
 but still...
 
 └─$ exrheader  whiteandblank
@@ -359,7 +353,7 @@ exrheader: Cannot read image file "whiteandblank". Early end of file: read 32591
 A this point we now have an EXR file with a displayWindow smaller than the dataWindow and also the first modification of header to 76 2d 3F 01 helping the file to be better interpreted by exrinfo.
 
 
-To get more eventually more detailed information about the error, checkexr.py  script is updated to catch a detailed exception (but...The Python OpenEXR library does not provide detailed information about the file structure )
+To get eventually more detailed information about the error, checkexr.py  script is updated to catch a detailed exception (but...The Python OpenEXR library does not provide detailed information about the file structure )
 ```
 PS D:\DATA\GIT\writeups\AsisCTF2023\UNSOLVED\white_and_blank\analysis> python .\checkexrdebug.py .\whiteandblank
 An error occurred: Cannot read image file "whiteandblank". Early end of file: read 325911 out of 1677721600 requested bytes.
@@ -380,7 +374,6 @@ OpenEXRUtil/ImfCheckFile.cpp:                "Early end of file: requesting "
 
 
 ```
-
 From ImfStdIO.cpp
 ```
 checkError (istream& is, streamsize expected = 0)
@@ -449,7 +442,6 @@ sudo make install
 ....
 42%] Building CXX object src/lib/OpenEXR/CMakeFiles/OpenEXR.dir/ImfStdIO.cpp.o
 [ 42%] Building CXX object src/lib/OpenEXR/CMakeFiles/OpenEXR.dir/ImfStringAttribute.cpp.o
-
 
 ─$ exrheader whiteandblank                                                                                                                                                                                               
 exrheader: Cannot read image file "whiteandblank". Early end of file at position 0xffffffffffffffff: read 325911 out of 1677721600 requested bytes.
@@ -530,7 +522,7 @@ Maximum Address:0004f987
 
 Interesting link even if not directly related to this challenge: https://ihack4falafel.github.io/Patch-Diffing-with-Ghidra/
 
-After checking Whith Ghydra differences on headers, it is Interesting to find that there is a signicative difference on the **compression** parameter !
+After checking whith Ghydra some differences on headers, it is interesting to find that there is a significative difference on the **compression** parameter !
 
 ![Alt text](image-24.png)
 
@@ -549,7 +541,6 @@ So we want to test a fix of this "issue" : a 26 to 00 then :
 ![Alt text](image-27.png)
 
 and yes the magic happen, the file is now recognized correctly :
-
 
 ```
 exrheader whiteandblank                                                                                  
@@ -588,9 +579,6 @@ Earlier in the analysis, another peculiar observation was that the tail of the f
 ![Alt text](image-32.png)
 
 
-
-
-
 ![Alt text](image-33.png)
 ref https://gist.github.com/leommoore/f9e57ba2aa4bf197ebc5
 
@@ -611,7 +599,7 @@ The previously extracted JPEG is seen corrupted for Gimp, so ... is this another
 Anyway Gimp is able to open the JPEG file that is displayed as a line  :
 ![Alt text](image-36.png).
 
-According to Gimp metadata the JPEG file is seen as quite small (257 x 1 ).
+According to Gimp metadata the JPEG file is seen as quite small (257 x 1)...
 
 Let's extract it with foremost:
 
@@ -643,7 +631,7 @@ Finish: Sun Jan 14 16:39:44 2024
 00000580.jpg: JPEG image data, baseline, precision 8, 257x1, components 1
 ```
 
-With ImHex we can use the Pattern fonctionnality to have better visibility on the file
+With ImHex we can use the Pattern fonctionnality to have better visibility on the file:
 File >> IMport >> Pattern file >>  jpeg.hexpat
 
 We can then navigate on the header with preloaded bookmarks and compare to the standard sections https://docs.fileformat.com/image/jpeg/ and https://en.wikipedia.org/wiki/JPEG_File_Interchange_Format
@@ -676,13 +664,13 @@ At this point we are getting closer as there are visible letters when opened wit
 
 ![Alt text](image-42.png)
 
-Then we continue to play with the sizes .
+Then we continue to play with the sizes.
 
-Finally 1523 X 1523 is OK () but still not ok.. for gimp but no problem) 
+Finally 1523 X 1523 is OK () but still not ok...for gimp but no problem... 
 
 ![Alt text](image-43.png)
 
-An then, behold,  finally we get the FLAG !! (logically with height=37=0x25, all is OK)
+An then, behold, finally we get the FLAG !! (logically with height=37=0x25, all is OK)
 
 ![Alt text](image-44.png)
 
