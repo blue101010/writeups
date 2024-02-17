@@ -1,5 +1,6 @@
 # Writeups
-CTF and IT writeups
+
+CTF and vulns/exploits writeups
 
 
 
