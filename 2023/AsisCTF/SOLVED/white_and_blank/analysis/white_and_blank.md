@@ -1,8 +1,8 @@
 # Challenge White & Blank
 
+From the strings in the provided file, it looks like an openEXR format file, refering to  <https://openexr.com/en/latest/>.
 
-From the strings in the provided file, it looks like an openEXR format file, REF https://openexr.com/en/latest/
-```
+```bash
 strings whiteandblank | more
 channels
 chlist
@@ -23,16 +23,19 @@ float
 ```
 
 # Install openexr
-Let's install openexr
-```
-https://openexr.com/en/latest/install.html#install
-% sudo apt-get update
-% sudo apt-get install openexr
+
+Let's install openexr on Kali :
+
+```bash
+# https://openexr.com/en/latest/install.html#install
+sudo apt-get update
+sudo apt-get install openexr
 ```
 
-## # Install openexr from sources
+## Install openexr from sources
 To use exrcheck on Kali Linux, you need to build it from the OpenEXR source code. Here are the steps:
-```
+
+```bash
 sudo apt-get install cmake libopenexr-dev
 git clone https://github.com/AcademySoftwareFoundation/openexr.git
 cd openexr
@@ -40,7 +43,6 @@ mkdir build
 cd build
 cmake ..
 make
-
 
 └─$ exrcheck --version
 exrcheck (OpenEXR) 3.3.0 https://openexr.com
@@ -60,14 +62,15 @@ https://www.garykessler.net/library/file_sigs.html
 ...but the file start with 76 2d 3F 01
 ![Alt text](image-2.png)
 
-```
+```bash
 ─$ okteta whiteandblank
 ```
 
 ![Alt text](image-3.png)
 
 After modification of the header to 76 2d 3F 01, the file is better interpreted by exrinfo  (but still considered bad from exrcheck...)
-```
+
+```bash
 └─$ exrinfo whiteandblank
 File 'whiteandblank':
   compression: 'zip'
@@ -83,13 +86,14 @@ File 'whiteandblank':
  file whiteandblank bad
 ```
 
-Early end of file...
-```
+Early end of file... : 
+
+```bash
 python .\checkexr.py .\whiteandblank
 An error occurred: Cannot read image file "whiteandblank". Early end of file: read 325911 out of 1677721600 requested bytes.
 ```
 
-```
+```bash
 └─$ exiftool whiteandblank
 ExifTool Version Number         : 12.67
 File Name                       : whiteandblank
@@ -120,9 +124,7 @@ The file seems to be composed of 2 parts...
 
 ![Alt text](image-4.png)
 
-
 Based on https://en.wikipedia.org/wiki/List_of_file_signatures
-
 
 ![Alt text](image-6.png)
 
@@ -131,7 +133,6 @@ whiteandblank file : D8 FF E0 00 10 47 46 49 50 00 01
 jpeg RAW           : D8 FF E0 00 10 4A 46 49 46 00 01
 
 Example https://asecuritysite.com/forensics/jpeg?file=image002.jpg
-
 
 From https://stackoverflow.com/questions/38346442/how-to-check-if-jpg-file-contains-other-types-of-images :: 
 ""The thumbnail image pixel size is 0x0 in this header""
@@ -149,7 +150,8 @@ From https://www.ccoderun.ca/programming/2017-01-31_jpeg/
 ![Alt text](image-8.png)
 
 Nothing from foremost, binwalk...etc
-```
+
+```bash
 ─$ binwalk whiteandblank
 DECIMAL       HEXADECIMAL     DESCRIPTION
 -----------------------------------------
@@ -158,8 +160,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 Let's modify the first byte 00 D8 in FF D8
 ![Alt text](image-9.png)
 
-
-```
+```bash
 └─$ xxd -c16 -g1 -u whiteandblank | grep --color=always  "FF D8"
 
 ┌──()-[/mnt/d/DATA/GIT/writeups/AsisCTF2023/UNSOLVED/white_and_blank]
@@ -180,7 +181,7 @@ $ xxd -c16 -g1 -u whiteandblank | grep --color=always  "FF DA"
 0004f980: E0 47 81 4F 08 9A FF D9                          .G.O....
 ```
 
-```
+```bash
  python .\extract_jpeg.py
 JPEG data extracted to: output.jpg                                           
 output.jpg: JPEG image data, baseline, precision 8, 257x1, components 1
@@ -195,7 +196,7 @@ From https://29a.ch/photo-forensics/#forensic-magnifier
 
 ![Alt text](image-10.png)
 
-```
+```bash
 └─$ exiftool output.jpg
 ExifTool Version Number         : 12.67
 File Name                       : output.jpg
@@ -218,7 +219,7 @@ Megapixels                      : 0.000257
 ```
 
 
-```
+```bash
 python .\extract_jpeg.py
 JPEG data extracted to: output.jpg
 > python .\jpegsnoopcolors.py
@@ -252,7 +253,8 @@ hello.exr :
 and https://github.com/annguyen-ilm/openexr/blob/1545_fix_formatting_sample_exr/website/OpenEXRFileLayout.rst
 
 So 80 3F 00 is the end of the oepenEXR header :
-```
+
+```bash
 └─$ xxd -c16 -g1 -u whiteandblank | grep --color=always  "80 3F 00"
 00000130: 04 00 00 00 00 00 80 3F 00 61 02 00 00 00 00 00  .......?.a......
 ```
@@ -263,7 +265,9 @@ So 80 3F 00 is the end of the oepenEXR header :
 At this point we have an EXR file:
 - with a displayWindow larger than dataWindow...
 - An EXR file that have an "early ending" anf a end of file that is a JPEG (247 x 1 pixels)
-```
+
+
+```bash
 └─$ exrinfo whiteandblank
 File 'whiteandblank':
   compression: 'zip'
@@ -333,7 +337,8 @@ Then 36 05  becoming 24 00:
 ![Alt text](image-19.png)
 
 results in DisplayWindow: [ 0, 0 - 36 36 ] 37 x 37
-```
+
+```bash
 $ exrinfo whiteandblank
 File 'whiteandblank':
   compression: 'zip'
