@@ -56,4 +56,6 @@ Connection closed by foreign host.
 
 # FLAG
 
+```
 HTB{B3sT_0f_luck_1n_th3_Fr4y!!}
+```

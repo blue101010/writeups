@@ -1,8 +1,6 @@
 # ANALYSIS
 
-
-
-Step 1 : Urgent Faction Recruitment Opportunity - Join Forces Against KORP™ Tyranny.eml : last par od the eml is base64 decoded
+Step 1 : Urgent Faction Recruitment Opportunity - Join Forces Against KORP™ Tyranny.eml : last par of the eml is base64 decoded
 
 ```
 <html>
