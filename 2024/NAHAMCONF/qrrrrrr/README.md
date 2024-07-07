@@ -141,9 +141,20 @@ So we get the flag, not the fastest method (much faster with QRQR mobile applica
 flag{a44557e380e3baae9c21c738664c6142}
 ```
 
+## zxing-cpp/wasm reader demo
+
+We can also confirm it with the [zxing-demo reader](https://zxing-cpp.github.io/zxing-cpp/demo_reader.html) that have an awsome list of QR specifications.
+We import the file and get the flag confirmation:
+
+![alt text](zxing-cpp-wasm-reader.png)
+
+
+
 ## MISC
 
 ## Details and spec
+
+QR Code Model 2 Structure and Algorithms: <https://franckybox.com/wp-content/uploads/qrcode.pdf>
 
 ISO/IEC 23941
 
