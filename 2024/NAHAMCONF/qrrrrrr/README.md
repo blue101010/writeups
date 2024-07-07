@@ -15,7 +15,7 @@ Algorithms used in QR codes:
 * Bresenham's line algorithm <https://en.wikipedia.org/wiki/Bresenham's_line_algorithm>
 * Reed-Solomon (ref to Galois field), Refer to <https://github.com/gurushida/qrcode/blob/master/reedsolomon.h>
 
-## Analysis 2 : get the size and details of the QR code
+## Analysis 2: get the size and details of the QR code
 
 ```
 python .\rmqrdecode3.py
@@ -44,7 +44,7 @@ We can check transitions in the sum arrays, it seems that we have 11 bumps with 
 
 ![alt text](rmqrdecode6.png)
 
-## Analysis 2: build ZXingReader
+## Analysis 3: build ZXingReader
 
 Let's decode the RMQR with maximum of details and ability to dig further..., for that we will compile zxing-cpp:
 
@@ -97,16 +97,14 @@ cmake --build zxing-cpp.release -j8 --config Release
 ZXingReader 2.2.1
 ```
 
-## Analysis 3: ZXingReader qrrrrrrrr.png
+## Analysis 4: decoding the RMQR
 
 Note : with extra debug mode I display explicitly that there is no errors recoverd via reed-solomon Algo and confrim 38 bytes 
 ```
-─$ ZXingReader qrrrrrrrr.png
 
 $  ZXingReader qrrrrrrrr.png
 No errors to correct.
-Error: No error locations found.
-Error: No error locations found.
+...
 Error: No error locations found.
 Text:       "Debug: str length = 6
 ...
@@ -136,9 +134,9 @@ Version:    14
 7B -> {
 61 -> a
 ...
-
 ```
 
+So we get the flag, not the fastest method (much faster with QRQR mobile application but much deeper analysis capabilities ;-)
 ```
 flag{a44557e380e3baae9c21c738664c6142}
 ```
@@ -150,7 +148,6 @@ flag{a44557e380e3baae9c21c738664c6142}
 ISO/IEC 23941
 
 ref <https://en.m.wikipedia.org/wiki/Rectangular_Micro_QR_Code>
-
 
 <https://github.com/shogo82148/qrcode/blob/main/rmqr/decode.go>
 
@@ -177,13 +174,13 @@ ref <https://en.m.wikipedia.org/wiki/Rectangular_Micro_QR_Code>
 
 <https://observablehq.com/@zavierhenry/encoding-qr-codes>
 
-https://www.qrcode.com/en/codes/rmqr.html
+<https://www.qrcode.com/en/codes/rmqr.html>
 
 <https://github.com/Slamy/YetAnother2dCodeDecoder>
 
 <https://zint.org.uk/manual/chapter/6/6>
 
-https://github.com/shogo82148/qrcode/tree/main/rmqr
+<https://github.com/shogo82148/qrcode/tree/main/rmqr>
 
 <https://github.com/soya-daizu/goban>
 
@@ -194,4 +191,3 @@ Paragraphe 6.6.4 Rectangular Micro QR Code (rMQR) (ISO 23941)  de <https://zint.
 ## Other Writeups
 
 <https://medium.com/@inferiorak/qrrrrrrrr-nahamcon-ctf-2024-writeup-by-inferiorak-063406df187e>
-
