@@ -5,7 +5,7 @@
 
 Open the file in [  hex editor.](https://hexed.it/)
 
-By default Hex editor does not recognize the file as PNG but we know for a fact is is a PNG.
+By default Hex editor does not recognize the file as PNG but we know for a fact it is a PNG.
 
 ![alt text](image.png)
 
