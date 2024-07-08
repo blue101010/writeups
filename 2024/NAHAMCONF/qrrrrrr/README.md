@@ -148,8 +148,6 @@ We import the file and get the flag confirmation:
 
 ![alt text](zxing-cpp-wasm-reader.png)
 
-
-
 ## MISC
 
 ## Details and spec
