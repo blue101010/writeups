@@ -3,26 +3,27 @@
 
 ## Step 1: magic header analysis
 
-Open the file in [  hex editor.](https://hexed.it/)
+Open the file in [hex editor](https://hexed.it/)
 
 By default Hex editor does not recognize the file as PNG but we know for a fact it is a PNG.
 
 ![alt text](image.png)
 
 
-
 ## Step 2: Fix magic header
 
 Let's fix the header:
 
-```
+```bash
 ‰RNG (hex: 89 52 4E 47)
 ```
 
-Replace the modified header with the correct PNG header
-```
+Replace the modified header with the correct PNG header:
+
+```bash
 ‰PNG (hex: 89 50 4E 47)
 ```
+
 Save the modified file.
 
 
@@ -34,7 +35,6 @@ Save the modified file.
 We retrieve the difference of header modified with imhex:
 
 ![alt text](image-4.png)
-
 
 # FIX: a more advanced fix in python
 
@@ -81,8 +81,6 @@ File: 2_fixed_magic_repairman.png (17315 bytes)
 No errors detected in 2_fixed_magic_repairman.png (7 chunks, 99.2% compression).
 ```
 
-
-
 ## Extra investigations on PNG Format
 
 Ath the begining, with pngcheck we have a zlib warning:
@@ -93,24 +91,25 @@ zlib warning:  different version (expected 1.2.13, using 1.3)
 
 magic_repairman.png  this is neither a PNG or JNG image nor a MNG stream
 ERROR: magic_repairman.png
-
 ```
 
 We can confirm also the challenge is just about the magic header, nothing to see with binwalk:
-```
+
+```bash
 $ binwalk magic_repairman.png
 
 DECIMAL       HEXADECIMAL     DESCRIPTION
 -----------------------------------------------------------
 ```
 
-zteg also refuse to work on files with incorrect headers
-```
+zteg also refuse to work on files with incorrect headers:
+
+```bash
 zsteg -a magic_repairman.png
 [!] #<ZPNG::NotSupported: Unsupported header "\x89RNG\r\n\x1A\n" in #<File:magic_repairman.png>>
 ```
 
-The error message encountered indicate that there may be more issues with the file beyond just the header modification. 
+The error message encountered indicate that there may be more issues with the file beyond just the header modification.
 
 The zlib warning suggests that there might be a problem with the compression data within the file. However, since the structure of the file includes recognizable PNG chunks (IHDR, pHYs, IDAT), it is worth trying to investigate and fix the file further.
 
@@ -124,8 +123,7 @@ PNG files use CRC (Cyclic Redundancy Check) for each chunk to ensure data integr
 *IEND Chunk: Marks the end of the PNG file
 
 
-
-```
+```bash
 +-----------------------------+
 |   PNG File Structure        |
 +-----------------------------+
@@ -188,7 +186,8 @@ PNG files use CRC (Cyclic Redundancy Check) for each chunk to ensure data integr
 ```
 
 In the end, the CRC are OK and Zlib only warnings (need to improve how it is processed) as per below check:
-```
+
+```bash
 └─$ python png_crc_check.py 1_fixed_magic_repairman.png
 PNG CRC Check
 +------+--------+-------------------+---------------------+-------------------+----------------+
