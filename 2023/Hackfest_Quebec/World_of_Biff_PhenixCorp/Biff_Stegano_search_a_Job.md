@@ -1,6 +1,6 @@
 # Challenge
 
-```
+```bash
 ─ World of Biff (PhenixCorp)
     ├── Biff Stegano search a Job! (300)
 ```
@@ -8,7 +8,7 @@
 
 # Solution
 
-```
+```bash
 $ zsteg Talenty-CTF.png
 [?] 118227 bytes of extra data after image end (IEND), offset = 0x408d9
 extradata:imagedata ..
@@ -48,6 +48,7 @@ b4,rgb,lsb,xy       .. file: raw G3 (Group 3) FAX, byte-padded
 
 
 # Flag
+
 ```
 HF-735fcd9781d79b80fe55ddee65b852f1
 ```
