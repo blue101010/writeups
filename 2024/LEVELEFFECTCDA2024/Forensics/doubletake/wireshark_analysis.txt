@@ -1,0 +1,175 @@
+Frame 1: 126989 bytes on wire (1015912 bits), 126989 bytes captured (1015912 bits)
+MIME file
+JPEG File Interchange Format
+    Marker: Start of Image (0xffd8)
+    Marker segment: Reserved for application segments - 0 (0xFFE0)
+        Marker: Reserved for application segments - 0 (0xffe0)
+        Length: 16
+        Identifier: JFIF
+        Version: 1.1
+            Major Version: 1
+            Minor Version: 1
+        Units: No units; Xdensity and Ydensity specify the pixel aspect ratio (0)
+        Xdensity: 1
+        Ydensity: 1
+        Xthumbnail: 0
+        Ythumbnail: 0
+    Comment header: Comment (0xFFFE)
+        Marker: Comment (0xfffe)
+        Length: 31
+        Comment: Compressed by jpeg-recompress
+    Marker segment: Define quantization table(s) (0xFFDB)
+        Marker: Define quantization table(s) (0xffdb)
+        Length: 132
+        Remaining segment data: 130 bytes
+    Start of Frame header: Start of Frame (non-differential, Huffman coding) - Progressive DCT (0xFFC2)
+        Marker: Start of Frame (non-differential, Huffman coding) - Progressive DCT (0xffc2)
+        Length: 17
+        Sample Precision (bits): 8
+        Lines: 1623
+        Samples per line: 595
+        Number of image components in frame: 3
+        Component identifier: 1
+        0010 .... = Horizontal sampling factor: 2
+        .... 0010 = Vertical sampling factor: 2
+        Quantization table destination selector: 0
+        Component identifier: 2
+        0001 .... = Horizontal sampling factor: 1
+        .... 0001 = Vertical sampling factor: 1
+        Quantization table destination selector: 1
+        Component identifier: 3
+        0001 .... = Horizontal sampling factor: 1
+        .... 0001 = Vertical sampling factor: 1
+        Quantization table destination selector: 1
+    Marker segment: Define Huffman table(s) (0xFFC4)
+        Marker: Define Huffman table(s) (0xffc4)
+        Length: 28
+        Remaining segment data: 26 bytes
+    Start of Segment header: Start of Scan (0xFFDA)
+        Marker: Start of Scan (0xffda)
+        Length: 8
+        Number of image components in scan: 1
+        Scan component selector: 1
+        0000 .... = DC entropy coding table destination selector: 0
+        .... 0000 = AC entropy coding table destination selector: 0
+        Start of spectral or predictor selection: 0
+        End of spectral selection: 0
+        0000 .... = Successive approximation bit position high: 0
+        .... 0000 = Successive approximation bit position low or point transform: 0
+    Entropy-coded segment (dissection is not yet implemented) [truncated]: fbf03a8e1b7b888a2ccd1444cd66e23304c3966a635e3adc25193248121841e11796f345dc83a8cf25918e4a71d62fc02c3b240a23e12d5774275195dd47712ad33632a9d3651b15daca84d80925b1e9fd34bc9b
+    Marker segment: Define Huffman table(s) (0xFFC4)
+        Marker: Define Huffman table(s) (0xffc4)
+        Length: 20
+        Remaining segment data: 18 bytes
+    Start of Segment header: Start of Scan (0xFFDA)
+        Marker: Start of Scan (0xffda)
+        Length: 8
+        Number of image components in scan: 1
+        Scan component selector: 2
+        0001 .... = DC entropy coding table destination selector: 1
+        .... 0000 = AC entropy coding table destination selector: 0
+        Start of spectral or predictor selection: 0
+        End of spectral selection: 0
+        0000 .... = Successive approximation bit position high: 0
+        .... 0000 = Successive approximation bit position low or point transform: 0
+    Entropy-coded segment (dissection is not yet implemented) [truncated]: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    Marker segment: Define Huffman table(s) (0xFFC4)
+        Marker: Define Huffman table(s) (0xffc4)
+        Length: 20
+        Remaining segment data: 18 bytes
+    Start of Segment header: Start of Scan (0xFFDA)
+        Marker: Start of Scan (0xffda)
+        Length: 8
+        Number of image components in scan: 1
+        Scan component selector: 3
+        0001 .... = DC entropy coding table destination selector: 1
+        .... 0000 = AC entropy coding table destination selector: 0
+        Start of spectral or predictor selection: 0
+        End of spectral selection: 0
+        0000 .... = Successive approximation bit position high: 0
+        .... 0000 = Successive approximation bit position low or point transform: 0
+    Entropy-coded segment (dissection is not yet implemented) [truncated]: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    Marker segment: Define Huffman table(s) (0xFFC4)
+        Marker: Define Huffman table(s) (0xffc4)
+        Length: 60
+        Remaining segment data: 58 bytes
+    Start of Segment header: Start of Scan (0xFFDA)
+        Marker: Start of Scan (0xffda)
+        Length: 8
+        Number of image components in scan: 1
+        Scan component selector: 1
+        0000 .... = DC entropy coding table destination selector: 0
+        .... 0000 = AC entropy coding table destination selector: 0
+        Start of spectral or predictor selection: 1
+        End of spectral selection: 12
+        0000 .... = Successive approximation bit position high: 0
+        .... 0001 = Successive approximation bit position low or point transform: 1
+    Entropy-coded segment (dissection is not yet implemented) [truncated]: 92a2184a896454d0ada21e3ba8ae2ba88ffe5c3615f43f7eee1d0aea21e7bb874b5b48c2e2a135ded27fb98b5de52fdbb88f5ded21ff00c98b5de520fbd4c7aefa8ed7eea2b2d651ff00b98b42ba887fe5c5a15b
+    Marker segment: Define Huffman table(s) (0xFFC4)
+        Marker: Define Huffman table(s) (0xffc4)
+        Length: 72
+        Remaining segment data: 70 bytes
+    Start of Segment header: Start of Scan (0xFFDA)
+        Marker: Start of Scan (0xffda)
+        Length: 8
+        Number of image components in scan: 1
+        Scan component selector: 1
+        0000 .... = DC entropy coding table destination selector: 0
+        .... 0000 = AC entropy coding table destination selector: 0
+        Start of spectral or predictor selection: 13
+        End of spectral selection: 63
+        0000 .... = Successive approximation bit position high: 0
+        .... 0001 = Successive approximation bit position low or point transform: 1
+    Entropy-coded segment (dissection is not yet implemented) [truncated]: 7645c6257ce10f385f385f385f305f305f30513c417cc17cc17cc17cc17cc17cc17cc17cc17ce17cc17ce14f585f38513c62cb5ac2f982f982f9c2e5bc10f305f385cb782f9c2f9a5464d70e46501720892a7a82
+    Marker segment: Define Huffman table(s) (0xFFC4)
+        Marker: Define Huffman table(s) (0xffc4)
+        Length: 38
+        Remaining segment data: 36 bytes
+    Start of Segment header: Start of Scan (0xFFDA)
+        Marker: Start of Scan (0xffda)
+        Length: 8
+        Number of image components in scan: 1
+        Scan component selector: 1
+        0000 .... = DC entropy coding table destination selector: 0
+        .... 0000 = AC entropy coding table destination selector: 0
+        Start of spectral or predictor selection: 1
+        End of spectral selection: 63
+        0001 .... = Successive approximation bit position high: 1
+        .... 0000 = Successive approximation bit position low or point transform: 0
+    Entropy-coded segment (dissection is not yet implemented) [truncated]: 2dfd4b289a17f711579d23f3f2fd608a42bac4828c332850f31d227bbe165fc7112fc1af9b2291ee1ecef9fe60e0255a590de07bd21a4eb37f06446c0a3aa4b82777fa6f64c08bf2e5bc69cf231ef55f3b3f314e
+    Marker segment: Define Huffman table(s) (0xFFC4)
+        Marker: Define Huffman table(s) (0xffc4)
+        Length: 20
+        Remaining segment data: 18 bytes
+    Start of Segment header: Start of Scan (0xFFDA)
+        Marker: Start of Scan (0xffda)
+        Length: 8
+        Number of image components in scan: 1
+        Scan component selector: 2
+        0000 .... = DC entropy coding table destination selector: 0
+        .... 0001 = AC entropy coding table destination selector: 1
+        Start of spectral or predictor selection: 1
+        End of spectral selection: 63
+        0000 .... = Successive approximation bit position high: 0
+        .... 0000 = Successive approximation bit position low or point transform: 0
+    Entropy-coded segment (dissection is not yet implemented): 349f
+    Marker segment: Define Huffman table(s) (0xFFC4)
+        Marker: Define Huffman table(s) (0xffc4)
+        Length: 20
+        Remaining segment data: 18 bytes
+    Start of Segment header: Start of Scan (0xFFDA)
+        Marker: Start of Scan (0xffda)
+        Length: 8
+        Number of image components in scan: 1
+        Scan component selector: 3
+        0000 .... = DC entropy coding table destination selector: 0
+        .... 0001 = AC entropy coding table destination selector: 1
+        Start of spectral or predictor selection: 1
+        End of spectral selection: 63
+        0000 .... = Successive approximation bit position high: 0
+        .... 0000 = Successive approximation bit position low or point transform: 0
+    Entropy-coded segment (dissection is not yet implemented): 349f62004700560032005a00570078006c005a006d005a006c0059003300520037006300320035006c00590057007400350058003300560030005a006900300078004e006d0078006c00660051003d003d00
+    Marker: End of Image (0xffd9)
+
+
+
