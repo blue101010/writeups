@@ -162,7 +162,7 @@ $ xxd extraneous_bytes.bin
 V2ZWxlZmZlY3R7c25lYWt5X3V0Zi0xNmxlfQ== | FAIL as base64 flag
 V2ZWxlZmZlY3R7c25lYWt5X3V0Zi0xNmxlfQ= | FAIL as base64 flag
 
-Check with less bytes:
+Check with less
 ```bash
 filesize=$(stat -c%s "doubletake.jpg")
 skip_bytes=$((filesize - 78 - 2))
