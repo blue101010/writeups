@@ -14,7 +14,7 @@ So, we're likely dealing with an encoding that involves 6-bit groups.
 Step 2: Group the Binary String into 6-bit Blocks
 First, ensure the binary string's length is a multiple of 6. The given binary string has 120 bits, which is divisible by 6:
 
-```
+```bash
 Group  1: 110011
 Group  2: 101001
 Group  3: 111000
@@ -49,7 +49,7 @@ Add 32 to each decimal value to align with the printable ASCII range.
 
 ## FLAG
 
-```
+```bash
 $ python decode6bitsgroups.py 
 LinuxMUP{SIX_BIT_MESSAGE_CODE}
 ```
