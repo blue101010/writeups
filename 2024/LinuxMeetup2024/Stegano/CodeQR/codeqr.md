@@ -5,9 +5,11 @@ A priori le code QR a été altéré par la laveuse, des couleurs sont apparues.
 
 ## FLAG
 
-https://en.wikipedia.org/wiki/JAB_Code
-https://github.com/jabcode/jabcode
-https://jabcode.org/scan
+<https://en.wikipedia.org/wiki/JAB_Code>
+
+<https://github.com/jabcode/jabcode>
+
+<https://jabcode.org/scan>
 
 ```bash
 LinuxMUP{JabCodeQR)
