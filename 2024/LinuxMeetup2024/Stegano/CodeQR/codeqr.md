@@ -13,5 +13,5 @@ A priori le code QR a été altéré par la laveuse, des couleurs sont apparues.
 
 ```bash
 LinuxMUP{JabCodeQR)
-```bash
+```
 
